@@ -1,0 +1,10 @@
+﻿{
+  "Name": "FarmInstances",
+  "Author": "Timo Treichel",
+  "Version": "1.0.0",
+  "Description": "Every Player gets his own farm",
+  "UniqueID": "treinke.farminstances",
+  "EntryDll": "FarmInstances.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}

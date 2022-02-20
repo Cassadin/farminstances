@@ -1,0 +1,9 @@
+C:\Users\timo_\source\repos\TeamFarms\bin\Debug\net5.0\TeamFarms.deps.json
+C:\Users\timo_\source\repos\TeamFarms\bin\Debug\net5.0\TeamFarms.dll
+C:\Users\timo_\source\repos\TeamFarms\bin\Debug\net5.0\TeamFarms.pdb
+C:\Users\timo_\source\repos\TeamFarms\obj\Debug\net5.0\TeamFarms.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\timo_\source\repos\TeamFarms\obj\Debug\net5.0\TeamFarms.AssemblyInfoInputs.cache
+C:\Users\timo_\source\repos\TeamFarms\obj\Debug\net5.0\TeamFarms.AssemblyInfo.cs
+C:\Users\timo_\source\repos\TeamFarms\obj\Debug\net5.0\TeamFarms.csproj.CoreCompileInputs.cache
+C:\Users\timo_\source\repos\TeamFarms\obj\Debug\net5.0\TeamFarms.dll
+C:\Users\timo_\source\repos\TeamFarms\obj\Debug\net5.0\TeamFarms.pdb
