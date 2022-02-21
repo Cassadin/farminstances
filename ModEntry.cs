@@ -39,13 +39,16 @@ namespace FarmInstances
                     // was i there already?
                     if (this.currentMenu != "StardewValley.Menus.FarmhandMenu")
                     {
-                        StardewValley.Menus.FarmhandMenu menu = (StardewValley.Menus.FarmhandMenu)StardewValley.Menus.TitleMenu.subMenu;
+                        StardewValley.Menus.FarmhandMenu menu = ((StardewValley.Menus.FarmhandMenu)StardewValley.Menus.TitleMenu.subMenu);
                         // create new Button for an invitation-code
                         InviteToFarmSlot inv = new InviteToFarmSlot(menu, "Einladungscode erhalten?");
 
-                        // MenuSlots is protected ... how can i still use it?
-     //                   menu.MenuSlots.Add(inv);
-                        
+
+                        // MenuSlots is part of LoadGameMenu ... menu is an instance of FarmhandMenu ...
+                        // Reflection dont work. How can i still use it?
+                        List<LoadGameMenu.MenuSlot> slots = helper.Reflection.GetField<List<LoadGameMenu.MenuSlot>>(menu, "MenuSlots").GetValue();
+                        slots.Add(inv);
+
                         // save the name of the current menu
                         this.currentMenu = menu.ToString();
                     }
