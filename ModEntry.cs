@@ -7,6 +7,7 @@ using StardewValley.Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using xTile;
@@ -20,7 +21,9 @@ namespace FarmInstances
     internal class ModEntry : Mod
     {
         public static IModHelper helper = null;
+        public static ModEntry instance;
         public override void Entry(IModHelper helper) {
+            instance = this;
             ModEntry.helper = helper;
             new Events(); // alt: new Events(helper);
 
@@ -28,6 +31,7 @@ namespace FarmInstances
         }
 
         public string currentMenu = "";
+        private bool invcode_added = false;
         private void Rendered(object sender, RenderedEventArgs e)
         {
             // Am i in a SubMenu?
@@ -36,19 +40,20 @@ namespace FarmInstances
                 // ist it FarmhandMenu (picking of my farmer)
                 if (StardewValley.Menus.TitleMenu.subMenu.GetType() == typeof(StardewValley.Menus.FarmhandMenu))
                 {
-                    // was i there already?
-                    if (this.currentMenu != "StardewValley.Menus.FarmhandMenu")
+                    if (invcode_added == false)
                     {
                         StardewValley.Menus.FarmhandMenu menu = ((StardewValley.Menus.FarmhandMenu)StardewValley.Menus.TitleMenu.subMenu);
                         // create new Button for an invitation-code
                         InviteToFarmSlot inv = new InviteToFarmSlot(menu, "Einladungscode erhalten?");
 
-
                         // MenuSlots is part of LoadGameMenu ... menu is an instance of FarmhandMenu ...
                         // Reflection dont work. How can i still use it?
-                        List<LoadGameMenu.MenuSlot> slots = helper.Reflection.GetField<List<LoadGameMenu.MenuSlot>>(menu, "MenuSlots").GetValue();
-                        slots.Add(inv);
-
+                        List<LoadGameMenu.MenuSlot> slots = helper.Reflection.GetField<List<LoadGameMenu.MenuSlot>>(menu, "menuSlots").GetValue();
+                        if (slots.Count > 0)
+                        {
+                            slots.Add(inv);
+                            invcode_added = true;
+                        }
                         // save the name of the current menu
                         this.currentMenu = menu.ToString();
                     }
@@ -60,6 +65,7 @@ namespace FarmInstances
                     {
                         // save the name of the current menu
                         this.currentMenu = StardewValley.Menus.TitleMenu.subMenu.ToString();
+                        invcode_added = false;
                     }
                 }
             }
@@ -75,6 +81,7 @@ namespace FarmInstances
                         this.currentMenu = Game1.activeClickableMenu.ToString();
                     }
                 }
+                invcode_added = false;
             }
 
         }
@@ -109,6 +116,7 @@ namespace FarmInstances
         public override void Activate()
         {
             // what happens, when i click that button?
+            ModEntry.instance.Monitor.Log("Open the Code-Entering!!!!");
         }
     }
 
